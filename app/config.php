@@ -4,6 +4,15 @@
 
 	$configs->env->add('development');
 
+	$configs->env->development->baseURI = '/sistema/Levrochet/';
+
+	$configs->env->development->database->setConnectionData([
+		'host' => 'localhost', 
+		'user' => 'root',
+		'password' => '',
+		'dbname' => 'sistemahx'
+
+	]);
 	/*
 		//Globais
 		$configs->title = 'Titulo customizado';
