@@ -1,0 +1,7 @@
+Todo o Database foi modelado no MySQL Workbench;
+
+## Criação de Tabelas regras
+- Nome de Tabela sempre em LowerCase;
+- Em Ingles;
+- Plural;
+- Chave Primaria (id) em LowerCase, PK, NN(nao nula), AI (Auto Increment);

@@ -1,0 +1,50 @@
+Dicas do git
+
+## Fazer os Commits
+git add . //1° coloca os arquivos no staging
+git commit -m "comentario do commit" //finaliza o commit
+//para fazer o commit em uma linha, sem adicionar no Stage
+git commit -a -m "O '-a' serve para pular o add"
+
+## Para criar um ambiente de teste:
+git branch teste 
+//ou
+git checkout -b teste //cria e troca para o branch
+
+## Ver todos os Branchs:
+git branch
+
+## Para deletar um brach:
+git branch -d teste
+
+## Para trocar o banch
+git checkout teste
+
+## Trocar entre Brachs:
+git checkout teste
+//e para voltar ao branch principal
+git checkout master
+
+## Salvar as alterações de um Branch para outro:
+//1° esteja no Branch destino
+git merge teste //desta maneira as alterações do 'teste' irão para o 'master'
+
+## Criando um epositório para um Projeto novo:
+//Servidor, entra na pasta so Projeto
+git init --bare
+//para o cliente puxar os recursos:
+git clone file:////'nome_maquina_local'/pastado/projeto
+//se voce quiser puxar os arq e ainda coloca-los dentro de uma pasta
+git clone file:////'nome_maquina_local'/pastado/projeto 'nome_da_pasta'
+//para salvar, nao basta fazer um commit, porque eles salvarao apenas local
+//precisamos fazer um 'push' de todo o Branch e mandar para o servidor.
+//Qual o servidor que devemos mandar? Digite o comando:
+git remote //lista todos os servidores
+//assim que o seu servidor aparecer na lista use o comando para copiar o Branch:
+git push 'servidor' 'branch'
+//Ex.: git push origin master
+//para atualizar as informações, sem ter que puxar o projeto inteiro, comando:
+git pull origin master //porem ele atualiza e faz o merge automatico
+//recomendado usar o comando acima em outro branch
+
+
