@@ -13,6 +13,9 @@
 		'dbname' => 'sistemahx'
 
 	]);
+
+	$configs->env->development->auth->setURLs('/Levrochet/home/', '/Levrochet/login/');
+
 	/*
 		//Globais
 		$configs->title = 'Titulo customizado';
