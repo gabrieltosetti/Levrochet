@@ -29,6 +29,11 @@ git checkout master
 //1° esteja no Branch destino
 git merge teste //desta maneira as alterações do 'teste' irão para o 'master'
 
+## Gerar uma chave SSH:
+ssh-keygen
+/Abra o arquivo 'id_rsa.pub' com o bloco
+/copie o codigo e cole no GitHub
+
 ## Criando um epositório para um Projeto novo:
 //Servidor, entra na pasta so Projeto
 git init --bare
