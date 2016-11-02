@@ -44,14 +44,14 @@ class User extends \HXPHP\System\Model
 			return $callbackObj;
 		}
 
-		$post = array_merge($post, array(
+		$user_data = array(
 			'role_id' => $role->id,
 			'status' => 1 
-			));
+		);
 		//pega a senha do form e criptografa ela
 		$password = \HXPHP\System\Tools::hashHX($post['password']);
 		//troca a senha 'string' para a senha 'criptografada'
-		$post = array_merge($post, $password);
+		$post = array_merge($post, $user_data, $password);
 		//usa o POST como array para criação de um novo iten na tabela users
 		$cadastrar = self::create($post);
 
