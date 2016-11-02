@@ -13,6 +13,8 @@ class CadastroController extends \HXPHP\System\Controller
 			true
 		);
 
+		//IMPORTANTE:se a pagina é privada, apenas usuarios logados pode acessar, entao deixe em FALSE
+		//se a pagina é PUBLICA, apenas usuario NAO LOGADOS podem acessar, entao deixe em TRUE
 		$this->auth->redirectCheck(true);
 	}
 
@@ -34,6 +36,10 @@ class CadastroController extends \HXPHP\System\Controller
 					'Ops! Nâo foi possível efetuar seu cadastro. Verifique os erros abaixo:',
 					$cadastrarUsuario->errors
 				));
+			}
+			else
+			{
+				$this->auth->login($cadastrarUsuario->user->id, $cadastrarUsuario->user->username);
 			}
 
 		}
