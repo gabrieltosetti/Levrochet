@@ -5,7 +5,6 @@
                     <a id="logo" href="<?php echo BASE; ?>">
                         <img class="img-responsive" src="<?php echo IMG; ?>Levrochet-Logo.png" alt="">
                     </a>
-                    <?php echo (isset($this->menu) ? $this->menu : ''); ?>
                 </div>
                 <div class="panel-body">
                     <?php echo (isset($this->alert) ? $this->alert : ''); ?>
@@ -13,19 +12,19 @@
                       <div class="form-group">
                         <label for="name" class="col-sm-3 control-label">Nome:</label>
                         <div class="col-sm-8">
-                          <input required type="text" name="name" class="form-control" id="name" placeholder="hxtutors" value="<?php echo $this->request->post('name') ?>">
+                          <input required type="text" name="name" class="form-control" id="name" placeholder="Nome Completo">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="email" class="col-sm-3 control-label">E-mail:</label>
                         <div class="col-sm-8">
-                          <input required type="email" name="email" class="form-control" id="email" placeholder="seuemail@site.com.br" value="<?php echo $this->request->post('email') ?>">
+                          <input required type="email" name="email" class="form-control" id="email" placeholder="seuemail@site.com.br">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Usuário:</label>
                         <div class="col-sm-8">
-                          <input required type="text" name="username" class="form-control" id="username" placeholder="hxtutors" value="<?php echo $this->request->post('username') ?>">
+                          <input required type="text" name="username" class="form-control" id="username" placeholder="hxtutors">
                         </div>
                       </div>
                       <div class="form-group">
