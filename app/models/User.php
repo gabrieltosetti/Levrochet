@@ -31,17 +31,17 @@ class User extends \HXPHP\System\Model
 	public static function cadastrar(array $post)
 	{
 		//'stdClass' cria uma classe vazia
-		$userObj = new \stdClass; //PODERIA TER FEITO COM ARRAY
-		$userObj->user = null;
-		$userObj->status = false;
-		$userObj->errors = array();
+		$callbackObj = new \stdClass; //PODERIA TER FEITO COM ARRAY
+		$callbackObj->user = null;
+		$callbackObj->status = false;
+		$callbackObj->errors = array();
 
 		//vai ate a tabela Role e pega a linha do tipo de usuário "user"
 		$role = Role::find_by_role('user');
 		//coloca no post o ID do 'user' e o status 1
 		if(is_null($role)){
-			array_push($userObj->errors, 'A role user não existe. Contate o administrador.');
-			return $userObj;
+			array_push($callbackObj->errors, 'A role user não existe. Contate o administrador.');
+			return $callbackObj;
 		}
 
 		$post = array_merge($post, array(
@@ -57,18 +57,18 @@ class User extends \HXPHP\System\Model
 
 		if ($cadastrar->is_valid())
 		{
-			$userObj->user = $cadastrar;
-			$userObj->status = true;
-			return $userObj;
+			$callbackObj->user = $cadastrar;
+			$callbackObj->status = true;
+			return $callbackObj;
 		}
 
 		$errors = $cadastrar->errors->get_raw_errors();
 
 		foreach($errors as $field => $message)
 		{
-			array_push($userObj->errors, $message[0]);
+			array_push($callbackObj->errors, $message[0]);
 		}
 
-		return $userObj;
+		return $callbackObj;
 	}
 }
