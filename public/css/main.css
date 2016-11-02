@@ -3,9 +3,9 @@ body{
 	color: #fff;
 }
 .panel.panel-custom{
-	cursor: pointer;
+/*	cursor: pointer;*/
 	background-clip: content-box;
-	border:2px dashed #0071BF;
+/*	border:2px dashed #0071BF;*/
 	margin-top: 20%;
 }
 .panel.panel-custom:hover{
