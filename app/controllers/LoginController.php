@@ -27,7 +27,7 @@ class LoginController extends \HXPHP\System\Controller
 
 		if(!empty($post))
 		{
-
+			User::login($post);
 		}
 	}
 }

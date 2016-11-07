@@ -78,20 +78,27 @@ class User extends \HXPHP\System\Model
 		{
 			$password = \HXPHP\System\Tools::hashHX($post['password'], $user->salt); //o segundo parametro e usado para gerar uma senha aleatório com o SALT que temos no banco de dados, assim sao gerados 2 senhas HASH IGUAIS.
 
-			if(LoginAttempt::ExistemTentativas($user->id))
+			if($user->status == 1)
 			{
-				if($password['password'] === $user->password)
+
+				if(LoginAttempt::ExistemTentativas($user->id))
 				{
-					LoginAttempt::LimparTentativas($user->id);
+					if($password['password'] === $user->password)
+					{
+						var_dump('logado');
+						LoginAttempt::LimparTentativas($user->id);
+					}
+					else
+					{
+						LoginAttempt::RegistrarTentativa($user->id);
+					}
 				}
-
-			} 
-			else 
-			{
-				LoginAttempt::RegistrarTentativa($user->id);
+				else
+				{
+					$user->status = 0;
+					$user->save(false); //o parametro false serve pára pular as validações se nao vai dar erro de EXCLUSIVIDADE
+				}
 			}
-
-			
 		}
 	}
 }
