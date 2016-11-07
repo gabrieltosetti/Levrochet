@@ -72,6 +72,11 @@ class User extends \HXPHP\System\Model
 
 	public static function login(array $post)
 	{
+		$callbackObj = new \stdClass; //PODERIA TER FEITO COM ARRAY
+		$callbackObj->user = null;
+		$callbackObj->status = false;
+		$callbackObj->code = null;
+
 		$user = self::find_by_username($post['username']);
 
 		if(!is_null($user))
@@ -85,20 +90,36 @@ class User extends \HXPHP\System\Model
 				{
 					if($password['password'] === $user->password)
 					{
-						var_dump('logado');
+						$callbackObj->user = $user;
+						$callbackObj->status = true;
+
 						LoginAttempt::LimparTentativas($user->id);
 					}
 					else
 					{
+						$callbackObj->code = "dados-incorretos";
+
 						LoginAttempt::RegistrarTentativa($user->id);
 					}
 				}
 				else
 				{
+					$callbackObj->code = "usuario-bloqueado";
+
 					$user->status = 0;
 					$user->save(false); //o parametro false serve pára pular as validações se nao vai dar erro de EXCLUSIVIDADE
 				}
 			}
+			else //usuario bloqueado
+			{
+				$callbackObj->code = "usuario-bloqueado";
+			}
 		}
+		else //usuario nao existe
+		{
+			$callbackObj->code = "usuario-inexistente";
+		}
+
+		return $callbackObj;
 	}
 }
