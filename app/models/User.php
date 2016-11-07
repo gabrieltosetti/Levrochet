@@ -69,4 +69,29 @@ class User extends \HXPHP\System\Model
 
 		return $callbackObj;
 	}
+
+	public static function login(array $post)
+	{
+		$user = self::find_by_username($post['username']);
+
+		if(!is_null($user))
+		{
+			$password = \HXPHP\System\Tools::hashHX($post['password'], $user->salt); //o segundo parametro e usado para gerar uma senha aleatório com o SALT que temos no banco de dados, assim sao gerados 2 senhas HASH IGUAIS.
+
+			if(LoginAttempt::ExistemTentativas($user->id))
+			{
+				if($password['password'] === $user->password)
+				{
+					LoginAttempt::LimparTentativas($user->id);
+				}
+
+			} 
+			else 
+			{
+				LoginAttempt::RegistrarTentativa($user->id);
+			}
+
+			
+		}
+	}
 }
