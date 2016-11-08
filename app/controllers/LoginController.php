@@ -14,6 +14,11 @@ class LoginController extends \HXPHP\System\Controller
 			true
 		);
 
+		
+	}
+
+	public function indexAction()
+	{
 		//IMPORTANTE:se a pagina é privada, apenas usuarios logados pode acessar, entao deixe em FALSE
 		//se a pagina é PUBLICA, apenas usuario NAO LOGADOS podem acessar, entao deixe em TRUE
 		$this->auth->redirectCheck(true);
@@ -21,6 +26,8 @@ class LoginController extends \HXPHP\System\Controller
 
 	public function logarAction()
 	{
+		$this->auth->redirectCheck(true);
+
 		$this->view->setFile('index'); //quando chamada esta ação, ela aproveita a view Index.
 
 		$post = $this->request->post();
@@ -44,5 +51,10 @@ class LoginController extends \HXPHP\System\Controller
 				$this->load('Helpers\Alert', $error);
 			}
 		}
+	}
+
+	public function sairAction()
+	{
+		return $this->auth->logout();
 	}
 }
