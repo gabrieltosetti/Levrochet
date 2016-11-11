@@ -151,6 +151,7 @@ class RecuperarController extends \HXPHP\System\Controller
 				if($atualizarSenha === true)
 				{
 					Recovery::limpar($validarToken->user->id);
+					LoginAttempt::LimparTentativas($validarToken->user->id);
 					$this->view->setPath('login');
 					$this->view->setFile('index');
 

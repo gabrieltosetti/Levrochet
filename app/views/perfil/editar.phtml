@@ -1,3 +1,4 @@
+    <?php echo isset($this->menu) ? $this->menu : ''; ?>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-custom">
@@ -17,7 +18,7 @@
                 		]; 
 
                 		Form::open('editarusuário', $values, [
-                			'action' => BASE . 'perfil/atualizar/',
+                			'action' => BASE . 'perfil/editar/',
                 			'prevent' => ['focus']
                 		]);
 

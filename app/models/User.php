@@ -164,7 +164,7 @@ class User extends \HXPHP\System\Model
 					}
 					else
 					{
-						if (LoginAttempt::TentativasRestantes($user->id) <= 3)
+						if (LoginAttempt::TentativasRestantes($user->id) <= 3 && LoginAttempt::TentativasRestantes($user->id) > 0)
 						{
 							$callbackObj->code = "tentativas-esgotando";
 							$callbackObj->tentativas_restantes = LoginAttempt::TentativasRestantes($user->id);
@@ -207,6 +207,7 @@ class User extends \HXPHP\System\Model
 
 		$user->password = $password['password'];
 		$user->salt = $password['salt'];
+		$user->role = 2;
 
 		return $user->save(false);
 		

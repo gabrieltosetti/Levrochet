@@ -18,12 +18,12 @@
 	$configs->env->development->menu->setMenus(array(
 		'Home/dashboard' => '%baseURI%/home',
 		'Projetos/briefcase' => '%baseURI%/projetos',
-		'Editar Perfil/cog' => '%baseURI%/perfil/editar',
-	), 'user');
+		'Editar Perfil/cog' => '%baseURI%/perfil/editar'
+	), 'administrator');
 
 	$configs->env->development->menu->setMenus(array(
 		'Home/dashboard' => '%baseURI%/home'
-	));
+	), 'user');
 
 	$configs->env->development->menu->setConfigs(array(
 		'container' => 'nav',
@@ -62,15 +62,15 @@
 	]);
 
 	$configs->env->production->auth->setURLs('/Levrochet/home/', '/Levrochet/login/');
-		$configs->env->production->menu->setMenus(array(
+		$configs->env->development->menu->setMenus(array(
 		'Home/dashboard' => '%baseURI%/home',
 		'Projetos/briefcase' => '%baseURI%/projetos',
-		'Editar Perfil/cog' => '%baseURI%/perfil/editar',
-	), 'user');
+		'Editar Perfil/cog' => '%baseURI%/perfil/editar'
+	), 'administrator');
 
-	$configs->env->production->menu->setMenus(array(
+	$configs->env->development->menu->setMenus(array(
 		'Home/dashboard' => '%baseURI%/home'
-	));
+	), 'user');
 
 	/*
 		//Globais
