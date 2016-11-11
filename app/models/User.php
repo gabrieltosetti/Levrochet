@@ -2,6 +2,9 @@
 
 class User extends \HXPHP\System\Model
 {
+	static $belongs_to = array(
+		array('role')
+	);
 	static $validates_presence_of = array(
 		array(
 			'name',
@@ -131,5 +134,18 @@ class User extends \HXPHP\System\Model
 		}
 
 		return $callbackObj;
+	}
+
+	public static function atualizarSenha($user, $newPassword)
+	{
+		$user = self::find_by_id($user->id);
+
+		$password = \HXPHP\System\Tools::hashHX($newPassword);
+
+		$user->password = $password['password'];
+		$user->salt = $password['salt'];
+
+		return $user->save(false);
+		
 	}
 }

@@ -6,31 +6,71 @@
 
 	$configs->env->development->baseURI = '/Levrochet/';
 
-	$configs->env->development->database->setConnectionData(array(
+	$configs->env->development->database->setConnectionData([
 		'host' => 'localhost', 
 		'user' => 'root',
 		'password' => '',
 		'dbname' => 'sistemahx'
 
-	));
+	]);
 
 	$configs->env->development->auth->setURLs('/Levrochet/home/', '/Levrochet/login/');
+	$configs->env->development->menu->setMenus(array(
+		'Home/dashboard' => '%baseURI%/home',
+		'Projetos/briefcase' => '%baseURI%/projetos',
+		'Editar Perfil/cog' => '%baseURI%/perfil/editar',
+	), 'user');
 
+	$configs->env->development->menu->setMenus(array(
+		'Home/dashboard' => '%baseURI%/home'
+	));
 
+	$configs->env->development->menu->setConfigs(array(
+		'container' => 'nav',
+		'container_id' => '',
+		'container_class' => 'navbar navbar-default',
+		'menu_id' => 'menu',
+		'menu_class' => 'navbar-nav nav',
+		'menu_item_class' => 'menu-item',
+		'menu_item_active_class' => 'active',
+		'menu_item_dropdown_class' => 'dropdown',
+		'link_before' => '<span>',
+		'link_after' => '</span>',
+		'link_class' => 'menu-link',
+		'link_active_class' => 'menu-active-link',
+		'link_dropdown_class' => 'dropdown-toggle',
+		'link_dropdown_attrs' => [
+			'data-toggle' => 'dropdown'
+		],
+		'dropdown_class' => 'dropdown-menu',
+		'dropdown_item_class' => 'dropdown-item',
+		'dropdown_item_active_class' => 'active'
+	));
+ 
+	//-----------------------PRODUCTION--------------------------------------------
 
 	$configs->env->add('production');
 
 	$configs->env->production->baseURI = '/Levrochet/';
 
-	$configs->env->production->database->setConnectionData(array(
+	$configs->env->production->database->setConnectionData([
 		'host' => 'localhost', 
 		'user' => 'root',
 		'password' => '',
 		'dbname' => 'sistemahx'
 
-	));
+	]);
 
 	$configs->env->production->auth->setURLs('/Levrochet/home/', '/Levrochet/login/');
+		$configs->env->production->menu->setMenus(array(
+		'Home/dashboard' => '%baseURI%/home',
+		'Projetos/briefcase' => '%baseURI%/projetos',
+		'Editar Perfil/cog' => '%baseURI%/perfil/editar',
+	), 'user');
+
+	$configs->env->production->menu->setMenus(array(
+		'Home/dashboard' => '%baseURI%/home'
+	));
 
 	/*
 		//Globais

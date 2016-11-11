@@ -2,6 +2,11 @@
 
 class Recovery extends \HXPHP\System\Model
 {
+	static $belongs_to = array( //esta e uma propriedade do PHP ACTIVERECORDS
+		array('user')
+	);
+
+
 	public static function validar($user_email)
 	{
 		$callback_obj = new \stdClass;
@@ -29,5 +34,38 @@ class Recovery extends \HXPHP\System\Model
 		}
 
 		return $callback_obj;
+	}
+
+	public static function validarToken($token)
+	{
+		$callback_obj = new \stdClass;
+		$callback_obj->user = null;
+		$callback_obj->code = null;
+		$callback_obj->status = false;
+
+
+		$validar = self::find_by_token($token);
+
+		if(!is_null($validar))
+		{
+			$callback_obj->status = true;
+			$callback_obj->user = $validar->user; //aqui ele usa a variavel estatica, buscando o usuario e passando para o usuario
+		}
+		else
+		{
+			$callback_obj->code = 'token-invalido';
+		}
+
+		return $callback_obj;   
+	}
+
+	public static function limpar($user_id)
+	{
+		return self::delete_all(array(
+			'conditions' => array(
+				'user_id = ?',
+				$user_id
+			)
+		));
 	}
 }

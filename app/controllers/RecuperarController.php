@@ -15,6 +15,11 @@ class RecuperarController extends \HXPHP\System\Controller
 		);
 
 		$this->auth->redirectCheck(true);
+
+		$this->view->setTitle('Levrochet - Altere sua senha');
+
+		$this->load('Modules\Messages', 'password-recovery');
+		$this->messages->setBlock('alerts');
 		
 	}
 
@@ -22,8 +27,6 @@ class RecuperarController extends \HXPHP\System\Controller
 	{
 		$this->view->setFile('index');
 
-		$this->load('Modules\Messages', 'password-recovery');
-		$this->messages->setBlock('alerts');
 
 		$this->request->setCustomFilters(array(
 			'email' => FILTER_VALIDATE_EMAIL
@@ -101,11 +104,66 @@ class RecuperarController extends \HXPHP\System\Controller
 
 	public function redefinirAction($token)
 	{
-		
+		$this->view->setTitle('Levrochet - Redefinir Senha');
+		$validarToken = Recovery::validarToken($token);
+
+		$error = null;
+
+		if($validarToken->status === false)
+		{
+			$error = $this->messages->getByCode($validarToken->code);
+		}
+		else
+		{
+			$this->view->setVar('token', $token);
+		}
+
+		if(!is_null($error))
+		{
+			$this->view->setFile('blank');
+			$this->load('Helpers\Alert', $error);
+		}
 	}
 
 	public function alterarSenhaAction($token)
 	{
-		
+		$this->view->setFile('redefinir');
+
+		$validarToken = Recovery::validarToken($token);
+
+		$error = null;
+
+		if($validarToken->status === false)
+		{
+			$this->view->setFile('blank');
+			$error = $this->messages->getByCode($validarToken->code);
+		}
+		else
+		{
+			$this->view->setVar('token', $token);
+
+			$password = $this->request->post('password');
+
+			if(!is_null($password))
+			{
+				$atualizarSenha  = User::atualizarSenha($validarToken->user, $password);
+
+				if($atualizarSenha === true)
+				{
+					Recovery::limpar($validarToken->user->id);
+					$this->view->setPath('login');
+					$this->view->setFile('index');
+
+					$success = $this->messages->getByCode('senha-redefinida');
+
+					$this->load('Helpers\Alert', $success);
+				}
+			}
+		}
+
+		if(!is_null($error))
+		{ 
+			$this->load('Helpers\Alert', $error);
+		}
 	}
 }

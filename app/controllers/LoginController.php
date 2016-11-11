@@ -38,7 +38,7 @@ class LoginController extends \HXPHP\System\Controller
 
 			if ($login->status === true)
 			{
-				$this->auth->login($login->user->id, $login->user->username);
+				$this->auth->login($login->user->id, $login->user->username, $login->user->role->role);
 			}
 			else
 			{

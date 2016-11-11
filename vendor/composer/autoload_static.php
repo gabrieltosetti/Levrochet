@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit65ada998f05f803f6188f83c8d90882a
+class ComposerStaticInit0fb34adbe3f8e15560d72aefab60736b
 {
     public static $files = array (
         '6e60481d8c04e99474e2ba7b3658ab5a' => __DIR__ . '/..' . '/php-activerecord/php-activerecord/ActiveRecord.php',
@@ -17,7 +17,7 @@ class ComposerStaticInit65ada998f05f803f6188f83c8d90882a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->fallbackDirsPsr0 = ComposerStaticInit65ada998f05f803f6188f83c8d90882a::$fallbackDirsPsr0;
+            $loader->fallbackDirsPsr0 = ComposerStaticInit0fb34adbe3f8e15560d72aefab60736b::$fallbackDirsPsr0;
 
         }, null, ClassLoader::class);
     }
