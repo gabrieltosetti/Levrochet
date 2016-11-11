@@ -4,10 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit0fb34adbe3f8e15560d72aefab60736b
+class ComposerStaticInit85693f67840154f25c7b3b699d30c997
 {
     public static $files = array (
         '6e60481d8c04e99474e2ba7b3658ab5a' => __DIR__ . '/..' . '/php-activerecord/php-activerecord/ActiveRecord.php',
+        'cf5020b74364025fca0e832b740d6050' => __DIR__ . '/..' . '/avbdr/php-bootstrap-form/PFBC/Form.php',
     );
 
     public static $fallbackDirsPsr0 = array (
@@ -17,7 +18,7 @@ class ComposerStaticInit0fb34adbe3f8e15560d72aefab60736b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->fallbackDirsPsr0 = ComposerStaticInit0fb34adbe3f8e15560d72aefab60736b::$fallbackDirsPsr0;
+            $loader->fallbackDirsPsr0 = ComposerStaticInit85693f67840154f25c7b3b699d30c997::$fallbackDirsPsr0;
 
         }, null, ClassLoader::class);
     }

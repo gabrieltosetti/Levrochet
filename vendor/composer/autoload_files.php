@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     '6e60481d8c04e99474e2ba7b3658ab5a' => $vendorDir . '/php-activerecord/php-activerecord/ActiveRecord.php',
+    'cf5020b74364025fca0e832b740d6050' => $vendorDir . '/avbdr/php-bootstrap-form/PFBC/Form.php',
 );

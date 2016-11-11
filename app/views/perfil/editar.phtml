@@ -1,0 +1,64 @@
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-custom">
+                <div class="panel-heading">
+                    <a id="logo" href="<?php echo BASE; ?>">
+                        <img class="img-responsive" src="<?php echo IMG; ?>Levrochet-Logo.png" alt="">
+                    </a>
+                </div>
+                <div class="panel-body">
+                	<?php 
+                		echo (isset($this->alert) ? $this->alert : '');
+
+                		$values = [
+                			'name' => $view_user->name,                			
+                			'username' => $view_user->username,                			
+                			'email' => $view_user->email                			
+                		]; 
+
+                		Form::open('editarusuário', $values, [
+                			'action' => BASE . 'perfil/atualizar/',
+                			'prevent' => ['focus']
+                		]);
+
+                			Form::Textbox(
+                				'Nome:',
+                				'name',
+                				[
+                					'required' => 1
+                				]
+                			);
+
+                			Form::Textbox(
+                				'Login:',
+                				'username',
+                				[
+                					'required' => 1
+                				]
+                			);
+
+                			Form::Email(
+                				'E-mail:',
+                				'email',
+                				[
+                					'required' => 1
+                				]
+                			);
+
+                			Form::Password(
+                				'Senha (Preencha apenas se desejar alterar):',
+                				'password'
+                			);
+
+                			Form::Button('Atualizar perfil', 'submit', [
+                				'class' => 'btn btn-success',
+                				'style' => 'width: 100%'
+                			]);
+
+                		Form::close(false);
+                	?>
+
+				</div>
+            </div>
+        </div>
+    </div>
