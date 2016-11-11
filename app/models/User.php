@@ -73,6 +73,69 @@ class User extends \HXPHP\System\Model
 		return $callbackObj;
 	}
 
+	public static function atualizar($user_id, array $post)
+	{
+		//'stdClass' cria uma classe vazia
+		$callbackObj = new \stdClass; //PODERIA TER FEITO COM ARRAY
+		$callbackObj->user = null;
+		$callbackObj->status = false;
+		$callbackObj->errors = array();
+
+		if (isset($post['password']) && !empty($post['password']))
+		{
+			//pega a senha do form e criptografa ela
+			$password = \HXPHP\System\Tools::hashHX($post['password']);
+			//troca a senha 'string' para a senha 'criptografada'
+			$post = array_merge($post, $password);
+		}
+		
+		$user = self::find($user_id);
+
+		$user->name = $post['name'];
+		$user->email = $post['email'];
+		$user->username = $post['username'];
+
+		if(isset($post['salt']))
+		{
+			$user->password = $post['password'];
+			$user->salt = $post['salt'];
+		}
+
+		$exist_email = self::find_by_email($post['email']);
+
+		if(!is_null($exist_email) && intval($user_id) !== intval($exist_email->id))
+		{
+			array_push($callbackObj->errors, 'Oops! Já existe um usuário com este e-mail cadastrado. Por favor, escolha outro e tente novamente.');
+			return $callbackObj;
+		}
+
+		$exist_username = self::find_by_username($post['username']);
+
+		if(!is_null($exist_username) && intval($user_id) !== intval($exist_username->id))
+		{
+			array_push($callbackObj->errors, 'Oops! Já existe um usuário com o Login <strong>' . $post['username'] . '</strong> cadastrado. Por favor, escolha outro e tente novamente.');
+			return $callbackObj;
+		}
+
+		$atualizar = $user->save(false);
+
+		if ($atualizar)
+		{
+			$callbackObj->user = $user;
+			$callbackObj->status = true;
+			return $callbackObj;
+		}
+
+		$errors = $atualizar->errors->get_raw_errors();
+
+		foreach($errors as $field => $message)
+		{
+			array_push($callbackObj->errors, $message[0]);
+		}
+
+		return $callbackObj;
+	}
+
 	public static function login(array $post)
 	{
 		$callbackObj = new \stdClass; //PODERIA TER FEITO COM ARRAY
